@@ -45,7 +45,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                String fullname, username, password, email;
+                String username, password;
                 username = String.valueOf(textInputEditTextUsername.getText());
                 password = String.valueOf(textInputEditTextPassword.getText());
 
@@ -58,12 +58,12 @@ public class Login extends AppCompatActivity {
                         public void run() {
 
                             String[] field = new String[2];
-                            field[0] = "username";
-                            field[1] = "password";
+                            field[0] = "Username";
+                            field[1] = "Password";
                             String[] data = new String[2];
                             data[0] = username;
                             data[1] = password;
-                            PutData putData = new PutData("http://localhost/IncidenciasTrafico/login.php", "POST", field, data);
+                            PutData putData = new PutData("http://192.168.22.134/LoginRegister/login.php", "POST", field, data);
                             if (putData.startPut()) {
                                 if (putData.onComplete()) {
                                     progressBar.setVisibility(View.GONE);

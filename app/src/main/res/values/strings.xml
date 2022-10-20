@@ -1,12 +1,18 @@
 <resources>
     <string name="app_name">LoginRegistrer</string>
+    <!--For Login-->
     <string name="username">Username</string>
     <string name="password">Password</string>
-    <string name="login">Login</string>
-    <string name="signup">SignUp</string>
-    <string name="fullname">Fullname</string>
+    <string name="login">Iniciar Sesion</string>
+    <!--For SignUp-->
+    <string name="signup">Registrarse</string>
+    <string name="fullname">Nombre</string>
+    <string name="apellido">Apellido</string>
+    <string name="celular">Celular</string>
     <string name="email">Email</string>
+    <string name="distrito">Distrito</string>
     <string name="loginhere">Already have an account Login</string>
     <string name="signuphere">Create a new Account? SignUp</string>
+
     <string name="welcome">Welcome</string>
 </resources>

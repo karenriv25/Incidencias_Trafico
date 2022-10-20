@@ -17,7 +17,7 @@ import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
 public class SingUp extends AppCompatActivity {
 
-    TextInputEditText textInputEditTextFullname, textInputEditTextUsername, textInputEditTextPassword, textInputEditTextEmail;
+    TextInputEditText textInputEditTextFullname, textInputEditTextApellido, textInputEditTextCelular, textInputEditTextUsername, textInputEditTextPassword, textInputEditTextEmail, textInputEditTextDistrito;
     Button buttonSignUp;
     TextView textViewLogin;
     ProgressBar progressBar;
@@ -28,9 +28,12 @@ public class SingUp extends AppCompatActivity {
         setContentView(R.layout.activity_sing_up);
 
         textInputEditTextFullname = findViewById(R.id.fullname);
+        textInputEditTextApellido = findViewById(R.id.apellido);
+        textInputEditTextCelular = findViewById(R.id.celular);
         textInputEditTextUsername = findViewById(R.id.username);
         textInputEditTextPassword = findViewById(R.id.password);
         textInputEditTextEmail = findViewById(R.id.email);
+        textInputEditTextDistrito = findViewById(R.id.distrito);
         buttonSignUp = findViewById(R.id.buttonSignUp);
         textViewLogin = findViewById(R.id.loginText);
         progressBar = findViewById(R.id.progress);
@@ -48,11 +51,14 @@ public class SingUp extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String fullname, username, password, email;
+                String fullname, apellido, celular, username, password, email, distrito;
                 fullname = String.valueOf(textInputEditTextFullname.getText());
+                apellido = String.valueOf(textInputEditTextApellido.getText());
+                celular = String.valueOf(textInputEditTextCelular.getText());
                 username = String.valueOf(textInputEditTextUsername.getText());
                 password = String.valueOf(textInputEditTextPassword.getText());
                 email = String.valueOf(textInputEditTextEmail.getText());
+                distrito = String.valueOf(textInputEditTextDistrito.getText());
 
                 if (!fullname.equals("") && !username.equals("") && !password.equals("") && !email.equals("")) {
 
@@ -62,17 +68,23 @@ public class SingUp extends AppCompatActivity {
                         @Override
                         public void run() {
 
-                            String[] field = new String[4];
-                            field[0] = "fullname";
-                            field[1] = "username";
-                            field[2] = "password";
-                            field[3] = "email";
-                            String[] data = new String[4];
+                            String[] field = new String[7];
+                            field[0] = "Nombre";
+                            field[1] = "Apellido";
+                            field[2] = "Celular";
+                            field[3] = "Username";
+                            field[4] = "Password";
+                            field[5] = "CorreElectronico";
+                            field[6] = "CodDistrito";
+                            String[] data = new String[7];
                             data[0] = fullname;
-                            data[1] = username;
-                            data[2] = password;
-                            data[3] = email;
-                            PutData putData = new PutData("http://localhost/IncidenciasTrafico/signup.php", "POST", field, data);
+                            data[1] = apellido;
+                            data[2] = celular;
+                            data[3] = username;
+                            data[4] = password;
+                            data[5] = email;
+                            data[6] = distrito;
+                            PutData putData = new PutData("http://192.168.22.134/LoginRegister/signup.php", "POST", field, data);
                             if (putData.startPut()) {
                                 if (putData.onComplete()) {
                                     progressBar.setVisibility(View.GONE);
