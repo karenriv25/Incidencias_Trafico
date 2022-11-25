@@ -66,7 +66,7 @@ public class Agregar extends AppCompatActivity {
             Toast.makeText(this, "Ingrese descripcion", Toast.LENGTH_SHORT).show();
             return;
         }else{
-            StringRequest request = new StringRequest(Request.Method.POST, "http://192.168.22.134/LoginRegister/insertar.php", new Response.Listener<String>(){
+            StringRequest request = new StringRequest(Request.Method.POST, "http://192.168.0.3/LoginRegister/insertar.php", new Response.Listener<String>(){
                 @Override
                 public void onResponse(String response){
                     if(response.equalsIgnoreCase("datos insertados")){

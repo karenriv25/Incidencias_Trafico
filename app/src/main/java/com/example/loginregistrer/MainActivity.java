@@ -1,5 +1,6 @@
 package com.example.loginregistrer;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,9 +10,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -24,6 +27,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,16 +36,17 @@ public class MainActivity extends AppCompatActivity {
     Adapter adapter;
 
     public static ArrayList<Incidente>incidentesArraylist = new ArrayList<>();
-    String url="http://192.168.22.134/LoginRegister/login.php";
+    String url="http://192.168.0.3/LoginRegister/mostrar.php";
     Incidente incidente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         listView = findViewById(R.id.listMostrar);
         adapter = new Adapter(this, incidentesArraylist);
-        listView.setAdapter(adapter);
+        listView.setAdapter((ListAdapter) adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
@@ -61,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
                                 startActivity(new Intent(getApplicationContext(), Editar.class).putExtra("position", position));
                                 break;
                             case 2:
-                                //EliminarDatos(incidenteArrayList.get(position).getId());
+                                EliminarDatos(incidentesArraylist.get(position).getId());
                                 break;
                         }
                     }
@@ -92,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
                             incidente = new Incidente(id, direccion, distrito, descripcion);
                             incidentesArraylist.add(incidente);
-                            /*adapter.notifyDataSetChanged();*/
+                            adapter.notifyDataSetChanged();
                         }
                     }
                 } catch (JSONException e) {
@@ -113,4 +119,32 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(getApplicationContext(),Agregar.class));
     }
 
+    private void EliminarDatos(String id) {
+        StringRequest request = new StringRequest(Request.Method.POST, "http://192.168.0.3/LoginRegister/eliminar.php", new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                if (response.equalsIgnoreCase("Datos eliminados")){
+                    Toast.makeText( MainActivity.this,"Eliminado", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                }else{
+                    Toast.makeText( MainActivity.this,"No se pudo eliminar", Toast.LENGTH_SHORT).show();
+                }
+            }
+        }, new Response.ErrorListener(){
+            @Override
+            public void onErrorResponse(VolleyError error){
+                Toast.makeText( MainActivity.this,"Error", Toast.LENGTH_SHORT).show();
+            }
+        }){
+            @Nullable
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String>params = new HashMap<>();
+                params.put("id", id);
+                return super.getParams();
+            }
+        };
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        requestQueue.add(request);
+    }
 }

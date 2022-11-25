@@ -12,14 +12,10 @@ public class Incidente {
     }
 
     public Incidente(String id, String direccion, String distrito, String descripcion) {
-
-    }
-
-    public Incidente(String direccion, String distrito, String descripcion) {
+        this.id = id;
         this.direccion = direccion;
         this.distrito = distrito;
         this.descripcion = descripcion;
-        this.id = id;
     }
 
     public String getId() {

@@ -84,7 +84,7 @@ public class SingUp extends AppCompatActivity {
                             data[4] = password;
                             data[5] = email;
                             data[6] = distrito;
-                            PutData putData = new PutData("http://192.168.22.134/LoginRegister/signup.php", "POST", field, data);
+                            PutData putData = new PutData("http://192.168.0.3/LoginRegister/signup.php", "POST", field, data);
                             if (putData.startPut()) {
                                 if (putData.onComplete()) {
                                     progressBar.setVisibility(View.GONE);

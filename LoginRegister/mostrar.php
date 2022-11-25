@@ -7,7 +7,7 @@ if (!$conexion) {
 
 $result = array();
 $result ['datos'] = array();
-$query = "SELECT *FROM incidente";
+$query = "SELECT *FROM tba_incidente";
 $responce = mysqli_query($conexion,$query);
 
 

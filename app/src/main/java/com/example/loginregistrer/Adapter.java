@@ -30,6 +30,8 @@ public class Adapter extends ArrayAdapter<Incidente> {
         TextView txt_Id = view.findViewById(R.id.txtId);
         TextView txt_Direccion = view.findViewById(R.id.txtDireccion);
 
+        txt_Id.setText(arrayIncidente.get(position).getId());
+        txt_Direccion.setText(arrayIncidente.get(position).getDireccion());
         return view;
     }
 }
