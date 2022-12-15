@@ -119,6 +119,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(getApplicationContext(),Agregar.class));
     }
 
+    public void Chat (View view){
+        startActivity(new Intent(getApplicationContext(),ChatBot.class));
+    }
+
     private void EliminarDatos(String id) {
         StringRequest request = new StringRequest(Request.Method.POST, "http://192.168.0.3/LoginRegister/eliminar.php", new Response.Listener<String>() {
             @Override

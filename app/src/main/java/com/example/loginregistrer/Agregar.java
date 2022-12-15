@@ -3,6 +3,7 @@ package com.example.loginregistrer;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,7 +28,9 @@ public class Agregar extends AppCompatActivity {
 
     EditText txt_Direccion, txt_Distrito, txt_Descripcion;
     Button btn_Insertar;
+    Button btn_Chat;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +47,8 @@ public class Agregar extends AppCompatActivity {
                 insertarDatos();
             }
         });
+
+        btn_Chat=findViewById(R.id.chatIcon);
     }
 
     private void insertarDatos() {
